@@ -3,7 +3,7 @@ package com.couggi.javagraphviz;
 
 /**
  * the Node Component of graphviz tools.
- * 
+ *
  * @author Everton Cardoso
  *
  */
@@ -12,44 +12,44 @@ public class Node implements Component {
 	private Graph graph;
 	private String name;
 	private Attrs attrs;
-	
-	
+
+
 	/**
 	 * node default.
 	 */
-	private Node(String name) { 
+	private Node(String name) {
 		this.name = name;
 		this.attrs = new Attrs(this);
 	}
-	
+
 	/**
 	 * create a node with name
 	 */
 	public Node(String name, Graph graph) {
 		this(name, name, graph);
 	}
-	
+
 	public Node(String label, String id, Graph graph) {
 		this(id);
 		this.graph = graph;
 		this.attr("label").value(label);
 	}
-	
-	/* 
+
+	/*
 	 * @see net.javagraphviz.Component#attribute(java.lang.String)
 	 */
 	public Attr attr(String name) {
 		return this.attrs.get(name);
 	}
 
-	/* 
+	/*
 	 * @see net.javagraphviz.Component#attributes()
 	 */
 	public Attrs attrs() {
 		return this.attrs;
 	}
-	
-	/* 
+
+	/*
 	 * @see net.javagraphviz.Component#name()
 	 */
 	public String name() {
@@ -82,12 +82,12 @@ public class Node implements Component {
 	}
 
 	public String output() {
-		
-		StringBuilder xOut = new StringBuilder(this.name);
+
+		StringBuilder xOut = new StringBuilder("\"" + this.name + "\"");
 	    StringBuilder xAttr = new StringBuilder("");
 	    String xSeparator = "";
-	    
-	    for (Attr attrs : this.attrs.list()) {   
+
+	    for (Attr attrs : this.attrs.list()) {
 		      if  ("html".equals(attrs.name())) {
 			      xAttr.append(xSeparator + "label = " + attrs.value().toGv());
 		      }else {
@@ -101,18 +101,18 @@ public class Node implements Component {
 	      xOut.append(";");
 
 	      return(xOut.toString());
-		
+
 	}
 
-	
+
 	/**
 	 * create the node default
 	 */
 	static Node getDefault(String name) {
 		return new Node(name);
 	}
-	
-	public Graph graph() { 
+
+	public Graph graph() {
 		return graph;
 	}
 

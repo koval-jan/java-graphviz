@@ -8,15 +8,15 @@ public class Edge implements Component {
 	private Node nodeTo;
 	private String name;
 	private Attrs attrs;
-	
+
 	/**
 	 * edge default.
 	 */
-	private Edge(String name) { 
+	private Edge(String name) {
 		this.name = name;
 		this.attrs = new Attrs(this);
 	}
-	
+
 	/**
 	 * create edge with two nodes.
 	 */
@@ -26,14 +26,14 @@ public class Edge implements Component {
 		this.nodeFrom = nodeFrom;
 		this.nodeTo = nodeTo;
 	}
-	
+
 	/**
 	 * node from
 	 */
 	public Node from() {
 		return nodeFrom;
 	}
-	
+
 	/**
 	 * node to
 	 */
@@ -41,31 +41,31 @@ public class Edge implements Component {
 		return nodeTo;
 	}
 
-	/* 
+	/*
 	 * @see net.javagraphviz.Component#name()
 	 */
 	public String name() {
 		return this.name;
 	}
-	
-	/* 
+
+	/*
 	 * @see net.javagraphviz.Component#attribute(java.lang.String)
 	 */
 	public Attr attr(String name) {
 		return this.attrs.get(name);
 	}
 
-	/* 
+	/*
 	 * @see net.javagraphviz.Component#attributes()
 	 */
 	public Attrs attrs() {
 		return this.attrs;
 	}
-	
+
 	/**
 	 * create the edge default
 	 */
-	static Edge getDefault(String name) { 
+	static Edge getDefault(String name) {
 		return new Edge(name);
 	}
 
@@ -97,15 +97,15 @@ public class Edge implements Component {
 	public String output() {
 
 		String xLink = " -> ";
-		
-		String xNodeNameOne = this.nodeFrom.name();
-		String xNodeNameTwo = this.nodeTo.name();
-  
+
+		String xNodeNameOne = "\"" + this.nodeFrom.name() + "\"";
+		String xNodeNameTwo = "\"" + this.nodeTo.name() + "\"";
+
 		StringBuilder xOut = new StringBuilder(xNodeNameOne + xLink + xNodeNameTwo);
 		StringBuilder xAttr = new StringBuilder("");
 		String xSeparator = "";
-		
-		for (Attr attrs : this.attrs.list()) {	  
+
+		for (Attr attrs : this.attrs.list()) {
 			xAttr.append(xSeparator + attrs.name() + " = " + attrs.value().toGv());
 			xSeparator = ", ";
 		}
@@ -115,9 +115,9 @@ public class Edge implements Component {
 		xOut.append(";");
 
 		return(xOut.toString());
-		
+
 	}
-	
-	
+
+
 
 }
